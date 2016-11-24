@@ -1,19 +1,32 @@
-Becoming an Expert in Elixir Syllabus
+## Becoming an Expert in Elixir Syllabus
 
-Installation / Setup
+---
 
-Week 1 Day 1:
+Setup / Getting Started
 
-Week 1 Day 2:
+- Installing Elixir
+- Elixir Command Line
+- Elixir Basic Syntax
 
-Week 2 Day 1: 
+Week 1:
 
-Week 2 Day 2: 
+- Collections
+- Pattern Matching
+- Modules and Functions
 
-Week 3 Day 1:
+Week 2:
 
-Week 3 Day 2: 
+- Compilation
+- Documentation
+- Mix
+- Testing
+- Actors
 
-Week 4 Day 1: 
+Week 3:
 
-Week 4 Day 2: 
+- OTP/Applications
+
+Week 4:
+
+- Tooling/Elixir Libraries
+- Metaprogramming (if there's time)
