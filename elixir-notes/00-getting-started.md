@@ -1,4 +1,4 @@
-## Elixir - The Language
+## Elixir Week 0: Getting Started
 
 Elixir is a dynamic, functional language designed for building scalable and maintainable applications.
 
@@ -54,6 +54,6 @@ Elixir leverages the Erlang VM, known for running low-latency, distributed and f
 * Comparisons: `!==`, `<=`, `>=`, `<`, `>`, `==`, `!=`, `===`
 ---
 
-### Exercises
+### Exercises (for next week)
 
-* Read 2. Collections, 4. Pattern Matching, 6. Functions from https://elixirschool.com
+* Read 1. Basics, 2. Collections, 4. Pattern Matching, 6. Functions from https://elixirschool.com
