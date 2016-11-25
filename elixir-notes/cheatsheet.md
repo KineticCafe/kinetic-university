@@ -1,4 +1,4 @@
-# Elixir University: Elixir Lesson One
+# Elixir Cheatsheet
 
 #### Environment
 
