@@ -56,4 +56,6 @@ Elixir leverages the Erlang VM, known for running low-latency, distributed and f
 
 ### Exercises (for next week)
 
-* Read 1. Basics, 2. Collections, 4. Pattern Matching, 6. Functions from https://elixirschool.com
+* Read from the [Getting Started](http://elixir-lang.org/getting-started/introduction.html) section of the Elixir website:
+  * Chapter 4: Pattern Matching
+  * Chapter 8: Modules
