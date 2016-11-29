@@ -21,6 +21,9 @@
   * `<<97,98,99>> == "abc"`
   * Strings are always double quoted
   * Interpolation: `lang = "Elixir"; IO.puts("yay, #{lang}!")`
+* Anonymous functions (they are first class!)
+  * `fn(a, b) -> a + b end`
+  * More on this in the functions section below
 
 ###### Collections
 
@@ -38,10 +41,52 @@
   * Unordered
   * Keys are unique
   * Syntactic sugar: `%{a: 1} == %{:a => 1}`
+  * Update syntax:
+
+    ```elixir
+    iex> map = %{a: 1, b: 2}
+    %{a: 1, b: 2}
+    iex> %{map | a: 3}
+    %{a: 3, b: 2}
+    ```
+* Structs
+  * A map with fixed fields that can have default values
+  * Define a struct within a module using `defstruct`:
+    ```elixir
+    defmodule Colour do
+      defstruct name: "black", r: 0, g: 0, b: 0
+    end
+
+    iex> %Colour{}
+    %Colour{name: "black", r: 0, g: 0, b: 0}
+    iex> %Colour{name: "magenta", r: 255, b: 255}
+    %Colour{name: "magenta", r: 255, g: 0, b: 255}
+    ```
 
 #### Syntax
 
 ###### Pattern matching
+
+* The match operator
+  ```elixir
+  iex> x = 1
+  1
+  iex> 1 = x
+  1
+  iex> 2 = x
+  ** (MatchError) no match of right hand side value: 1
+  ```
+
+* Matching on lists
+  ```elixir
+  iex> list = [1, 2, 3]
+  iex> [head | tail] = list
+  [1, 2, 3]
+  iex> head
+  1
+  iex> tail
+  [2, 3]
+  ```
 
 * Matching on simple types
   ``` elixir
@@ -61,7 +106,7 @@
        ["README.md", "meme.jpg", "jeremy_bad_joke_list.txt"]
   ```
 
-* Deconstructing HTML using Floki, an HTML parser
+* Deconstructing HTML data using Floki, an HTML parser
   ```elixir
   iex> html = "<a href='http://github.com/some/repo'>Click me</a>"
 
@@ -72,6 +117,16 @@
        "http://github.com/some/repo"
   iex> description
        "Click me"
+  ```
+
+* The pin operator (prevents rebinding in pattern matches)
+  ```elixir
+  iex> x = 1
+  1
+  iex> x = 2
+  2
+  iex> ^x = 3
+  ** (MatchError) no match of right hand side value: 3
   ```
 
 ###### Control flow
@@ -112,6 +167,99 @@
 
 #### Functions
 
-* Function names are listed with their arity (number of arguments): `Module.function_name/2`
-* Functions with the same name, but different arities, are _distinctly different functions_
-* Functions can also have multiple _clauses_, distinguished via guards
+###### Named functions
+
+* Named functions have a name and a function arity: `Module.function_name/2`. Functions with the same name and different arities are _not the same function_.
+
+* Functions with multiple clauses
+  ```elixir
+  defmodule Math do
+    def zero?(0), do: true
+    def zero?(x), when is_integer(x), do: false
+  end
+  ```
+
+* Default argument syntax
+  ```elixir
+  defmodule Concat do
+    def join(a, b, sep \\ " ") do  # NOTE: this defines Concat.join/2 AND Concat.join/3
+      a <> sep <> b
+    end
+  end
+  ```
+
+* Calling named functions
+  ```elixir
+  iex> Base.encode64("pizza is good")
+  "cGl6emEgaXMgZ29vZA=="
+  ```
+
+* Calling erlang functions (erlang module names are plain atoms!)
+  ```elixir
+  iex> :crypto.rand_bytes(3)
+  <<117, 252, 86>>
+  ```
+
+###### Anonymous functions
+
+* Defining and calling an anonmyous function
+  ```elixir
+  iex> add = fn(a, b) -> a + b end
+  iex> add.(1, 2)  # note the dot! This is necessary to invoke anonymous functions.
+  ```
+
+* __GOTCHA__: anonymous functions are closures. Named functions are not.
+  ```elixir
+  iex> x = 42
+  iex> (fn -> x end).()
+  42  # This will raise a compile error with a named function
+  ```
+
+* Function capture syntax (convert a named function to a function data type)
+  ```elixir
+  iex> fun = &Base.encode64/1
+  iex> is_function(fun)
+  true
+  iex> fun.("pizza is good")
+  "cGl6emEgaXMgZ29vZA=="
+  ```
+
+* Create new functions using the capture syntax
+  ```elixir
+  iex> fun = &(&1 + 1)
+  iex> fun.(1)
+  2
+  ```
+
+###### Pipe operator
+
+* Pass the first argument to a function using a pipe
+
+  ```elixir
+  iex> map = %{a: 1}
+  iex> Map.get(map, :a)
+  1
+  iex> map |> Map.get(:a)
+  1
+  ```
+
+#### Recursion
+
+* Recursion is the solution to enumeration in languages with immutable types
+  ```elixir
+  defmodule Math do
+    def sum_list([head | tail], accumulator) do
+      sum_list(tail, head + accumulator)
+    end
+
+    def sum_list([], accumulator) do
+      accumulator
+    end
+  end
+
+  iex> Math.sum_list([1,2,3], 0)
+  6
+  ```
+
+* Check `Enum` and `Stream` for higher-order functions that use recursion internally
+

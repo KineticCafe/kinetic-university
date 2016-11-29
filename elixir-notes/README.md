@@ -5,7 +5,7 @@ Check out the [Elixir cheatsheet](cheatsheet.md).
 ---
 
 
-[Week 0: Setup / Getting Started](00-getting-started.md)
+[Week 0:](00-getting-started/README.md)
 
 - Installing Elixir
 - Elixir Command Line
@@ -13,18 +13,20 @@ Check out the [Elixir cheatsheet](cheatsheet.md).
 - Functional programming basics
 - Type system
 
-Week 1:
+[Week 1:](01-pattern-matching-and-functions/README.md)
 
 - Pattern Matching
+- Control structures
 - Modules and Functions
 - Recursion
-- Testing
+- Some more data types
 
 Week 2:
 
 - Compilation
-- Documentation
 - Mix
+- Documentation
+- Testing
 - Actors
 
 Week 3:
