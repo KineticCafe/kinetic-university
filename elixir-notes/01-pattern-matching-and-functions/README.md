@@ -34,3 +34,8 @@ Guessing 273
 ```
 
 (In the `Workshop.guess/2` example, the `Guessing x` lines should be logs to the console. You can do this with `IO.puts/1`.)
+
+
+### Exercises (for next week)
+
+* Read [Introduction to Mix](http://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html)
