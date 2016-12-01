@@ -8,7 +8,7 @@ In Ruby, we mutate the variable
 print_multiple_times(msg, n)
   i = 0
 
-  while i < x
+  while i < n
     puts msg
     i += 1
   end
