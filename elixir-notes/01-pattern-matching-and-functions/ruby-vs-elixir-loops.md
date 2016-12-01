@@ -1,6 +1,6 @@
 # Ruby vs Elixir Loops
 
-## Ruby
+## Ruby (iterative)
 
 In Ruby, we mutate the variable
 
@@ -15,7 +15,7 @@ def print_multiple_times(msg, n)
 end
 ```
 
-## Elixir
+## Elixir (recursion)
 
 In Elixir, we rely on recursion (a function is called recursively until a condition is reached that stops the recursive action from continuing)
 
