@@ -5,7 +5,7 @@
 In Ruby, we mutate the variable
 
 ```
-print_multiple_times(msg, n)
+def print_multiple_times(msg, n)
   i = 0
 
   while i < n
