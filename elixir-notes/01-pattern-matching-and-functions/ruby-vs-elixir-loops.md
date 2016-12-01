@@ -2,18 +2,17 @@
 
 ## Ruby
 
-In Ruby, we mutate both the array and variable
+In Ruby, we mutate the variable
 
 ```
-i = 0
-numbers = []
+print_multiple_times(msg, n)
+  i = 0
 
-while i < 10
-  numbers.push(i)
-  i += 1
-end
-
-puts numbers
+  while i < x
+    puts msg
+    i += 1
+  end
+endgit
 ```
 
 ## Elxir
