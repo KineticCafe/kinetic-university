@@ -12,7 +12,7 @@ print_multiple_times(msg, n)
     puts msg
     i += 1
   end
-endgit
+end
 ```
 
 ## Elxir
