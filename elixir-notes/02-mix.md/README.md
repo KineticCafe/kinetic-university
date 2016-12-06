@@ -38,9 +38,9 @@ Fetch dependencies `mix deps.get`
 
 Out of the box mix works with 3 environments
 
-:dev — The default environment.
-:test — Used by mix test.
-:prod — Used when we ship our application to production
+- :dev — The default environment.
+- :test — Used by mix test.
+- :prod — Used when we ship our application to production
 
 ## Compiling
 
