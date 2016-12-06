@@ -48,13 +48,13 @@ There are two different file extensions in Elixir:
 - `file.ex` for compiled code
 - `file.exs` for interpreted code (used for scripts and tests)
 
-Compiling Elixir without mix
+#### Compiling Elixir without mix
 
 Option 1: Launch iex with the module as an argument `iex lib/example.ex`
 
 Option 2: Compile a module with the `elixirc` command e.g. `elixirc lib/example.ex`. This generates a file called `Elixir.Example.beam` When you launch iex the module will be available.
 
-Compiling Elixir with mix
+#### Compiling Elixir with mix
 
 To compile a mix project run `mix compile`
 
