@@ -1,1 +1,0 @@
-sidebarNodes={"extras":[{"id":"api-reference","title":"API Reference","group":"","headers":[{"id":"Modules","anchor":"modules"}]}],"exceptions":[],"modules":[{"id":"ExampleElixir","title":"ExampleElixir","functions":[{"id":"publish/1","anchor":"publish/1"}]}],"protocols":[]}
