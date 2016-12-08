@@ -1,10 +1,10 @@
-# Elixir: Session 2 - Mix
+# Elixir: Session 2 - Mix & Processes
 
 ## Mix
 
 Mix is a build tool that provides tasks for creating, managing dependencies, compiling, and testing Elixir projects. Mix is like Bundler, RubyGems and Rake combined.
 
-## Creating
+### Creating
 
 To generate a new project's folder structure, enter the command `mix new [project_name]`
 
@@ -23,7 +23,7 @@ The following boilerplate files are generated:
 
 The name of our application, versions, and dependencies are defined within `mix.exs`
 
-### Manage dependencies
+#### Manage dependencies
 
 Add new dependencies to the `deps` method in `mix.exs`
 
@@ -34,7 +34,7 @@ The dependency list is comprised of tuples with two required values and one opti
 
 Fetch dependencies `mix deps.get`
 
-### Environment variables
+#### Environment variables
 
 Out of the box mix works with 3 environments
 
@@ -42,7 +42,7 @@ Out of the box mix works with 3 environments
 - :test — Used by mix test.
 - :prod — Used when we ship our application to production
 
-## Compiling
+### Compiling
 
 There are two different file extensions in Elixir:
 - `file.ex` for compiled code
@@ -60,7 +60,7 @@ To compile a mix project run `mix compile`
 
 To use `iex` in context of your mix application, run `iex -S mix`
 
-## Documentation
+### Documentation
 
 Elixir supports module and function documentation. Documentation is defined with the help of the module attributes `@moduledoc` and `@doc`
 
@@ -83,7 +83,7 @@ end
 - Install dependency `mix deps.get`
 - Generate documentation `mix docs`
 
-## Testing
+### Testing
 
 Elixir comes with a built in tool for writing unit tests called `ExUnit`. `ExUnit` is a module that uses `ExUnit.Case`
 
@@ -99,7 +99,7 @@ end
 
 Run tests `mix test`
 
-### Test setup
+#### Test setup
 
 The macros `setup` and `setup_all` run before each test or once before the suite, respectively
 
@@ -130,11 +130,72 @@ end
 - `capture_io` captures an application's output
 - `capture_log` equivalent to `Logger`
 
+## Processes
 
-### Exercises (for today)
+All Elixir code runs inside lightweight processes that are isolated and exchange information via messages.
 
-- Review PR for GraphQL Service as a mix project
+- Receives messages asynchronously
+- Stores messages sequentially in a mailbox
+- Computes messages synchronously
+- A process can either: (1) send/receive messages to other processes, (2) modify private state, or (3) create new processes
+- A process dies when the function ends (or it crashes)
+- Processes can not share memory
 
-### Exercises (for Thursday)
+### Spawn
 
-* Read [Processes](http://elixir-lang.org/getting-started/processes.html
+Spawn is the easiest way to create a new process. Spawn takes either an anonymous or named function and returns a PID (process identifier).
+
+We can retrieve the PID of the current process by calling `self/0`
+
+We can link our processes using `spawn_link`. Linked processes will receive exit notifications from each other.
+
+```
+spawn_link fn -> raise "hell" end
+```
+
+If we want to get a message if the process crashes but not crash our current process, we can use `spawn_monitor`.
+
+```
+spawn_monitor fn -> raise "hell" end
+```
+
+### Send and Receive
+
+As mentioned, processes can only communicate via messages.
+
+We can send messages to a process with `send/2` and receive them with `receive/1`.
+
+```
+send pid, "world"
+```
+
+```
+pid = spawn fn ->
+  receive do
+    msg -> IO.puts "hello #{msg}"
+  end
+end
+```
+
+### State
+
+Processes that infinitely loop can send/receive messages and maintain state.
+
+```
+defmodule LoopedProcess do
+  def init do
+    spawn_link fn -> loop([]) end
+  end
+
+  def loop(state) do
+    receive do
+      msg ->
+        state = [msg | state]
+        IO.inspect state
+      loop(state)
+    end
+  end
+end
+```
+
+Using processes to maintain state is a very common pattern in Elixir. However, we usually don't have to implement these patterns manually because Elixir uses abstractions like Agents.
