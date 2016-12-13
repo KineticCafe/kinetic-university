@@ -199,3 +199,8 @@ end
 ```
 
 Using processes to maintain state is a very common pattern in Elixir. However, we usually don't have to implement these patterns manually because Elixir uses abstractions like Agents.
+
+## Exercises (for next week)
+
+- Review and understand the [process ring exercise](https://github.com/seven1m/30-days-of-elixir/blob/master/08-process-ring.exs).
+- Start the [Mix and OTP tutorial](http://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html). Try to complete the first few chapters.
