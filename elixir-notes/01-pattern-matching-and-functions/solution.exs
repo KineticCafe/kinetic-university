@@ -6,9 +6,9 @@ defmodule Workshop do
   @doc """
   Calculates the sum of every integer from 1 to n.
   """
-  @spec sum(pos_integer) :: pos_integer
+  @spec sum(non_neg_integer) :: non_neg_integer
   def sum(0), do: 0
-  def sum(n) when is_integer(n) and n < 0, do: n + sum(n-1)
+  def sum(n) when is_integer(n) and n > 0, do: n + sum(n-1)
 
   @doc """
   Uses a binary search to find the number `actual` from the given `range`.
