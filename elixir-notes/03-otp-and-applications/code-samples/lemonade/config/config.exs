@@ -2,6 +2,4 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-if Mix.env == :prod do
-  config :logger, level: :info
-end
+# config :logger, level: :info
