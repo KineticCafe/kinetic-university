@@ -263,3 +263,120 @@
 
 * Check `Enum` and `Stream` for higher-order functions that use recursion internally
 
+
+#### Mix
+
+* Generate a new mix project (including custom app and module names, plus a supervisor); get deps and test
+  ```bash
+  $ mix new elixir-otp-app --app elixir_otp_app --module ElixirOTPApp --sup
+  $ mix deps.get
+  $ mix test
+  ```
+
+#### Compiling
+
+* Compile a `.ex` file to a `.beam` file
+  ```bash
+  $ elixirc file_to_compile.ex  # creates a single beam file for each module
+  ```
+
+* Compile a file from the command line (file contains a `Test` module)
+  ```elixir
+  iex> c "file_to_compile.ex"
+  [Test]
+  ```
+
+* "Compile" an `.exs` file in-memory in iex
+  ```bash
+  $ iex elixir_script.exs
+  ```
+
+#### Processes
+
+###### Message-passing basics
+
+* Processes can send and receive messages from one another
+* Messages are stored in a process's "mailbox" on arrival
+* A process uses a `receive` block that operates on a single message
+* Mailbox is a queue; messages are operated on in order of arrival
+* If a `receive` block is called and there are no messages in the mailbox, the
+  process will block until a message arrives
+
+* A shell sends two messages to itself, receives the first two, then blocks
+  ```elixir
+  iex> send self, :one
+  iex> send self, :two
+
+  iex> receive do
+  ...>   msg -> msg
+  ...> end
+  :one
+
+  iex> receive do
+  ...>   msg -> msg
+  ...> end
+  :two
+
+  iex> receive do
+  ...>   msg -> msg
+  ...> end
+  # shell will hang here indefinitely
+  ```
+
+#### Spawning and linking processes
+
+* Processes created by `spawn` do not affect the parent process on crash
+  ```elixir
+  iex(68)> spawn fn -> raise "hell" end
+  #PID<0.101.0>
+  iex(69)>
+  20:33:42.111 [error] Process #PID<0.101.0> raised an exception
+  ** (RuntimeError) hell
+      :erlang.apply/2
+  iex(70)>
+  ```
+
+* Processes created by `spawn_link` crash the parent process on crash
+  ```elixir
+  iex(68)> spawn_link fn -> raise "hell" end
+  #PID<0.127.0>
+
+  20:35:55.536 [error] Process #PID<0.127.0> raised an exception
+  ** (RuntimeError) hell
+      :erlang.apply/2
+  ** (EXIT from #PID<0.120.0>) an exception was raised:
+      ** (RuntimeError) hell
+              :erlang.apply/2
+  iex(1)> ## The iex process crashed and was restarted by its supervisor
+  ```
+
+* Processes created with `spawn_monitor` send a message to the parent process on crash
+  ```elixir
+  iex> spawn_monitor fn -> raise "hell" end
+  {#PID<0.131.0>, #Reference<0.0.1.230>}
+
+  20:37:25.693 [error] Process #PID<0.131.0> raised an exception
+  ** (RuntimeError) hell
+      :erlang.apply/2
+
+  iex> receive do
+  ...>   msg -> msg
+  ...> end
+  {:DOWN, #Reference<0.0.1.230>, :process, #PID<0.131.0>, {%RuntimeError{message: "hell"}, [{:erlang, :apply, 2, []}]}}
+  ```
+
+#### Extras
+
+* Flush all messages from the shell mailbox (iex only)
+  ```elixir
+  iex> send self, :one
+  iex> send self, :two
+  iex> send self, :three
+  iex> flush
+  :one
+  :two
+  :three
+  :ok
+  ```
+
+

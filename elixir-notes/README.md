@@ -21,7 +21,7 @@ Check out the [Elixir cheatsheet](cheatsheet.md).
 - Recursion
 - Some more data types
 
-Week 2:
+Week 2: (02-mix/README.md)
 
 - Compilation
 - Mix
