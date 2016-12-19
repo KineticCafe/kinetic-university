@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <style>
+      .home {
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        color: #494652;
+      }
+      .app-name {
+        margin-top: 30vh;
+      }
+      .app-name h1{
+        font-size: 96px;
+      }
+      .orange {
+        color: #F4515A;
+      }
+      .btn-orange{
+        background-color: #F4515A;
+        color: #fff;
+      }
+      .btn-orange:hover{
+        color: #fff;
+      }
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+      }
+    </style>
+
+    <title>OKaraoke!</title>
+  </head>
+  <body class="home">
+    <div class="app-name">
+      <h1><span class="orange">:ok</span>araoke</h1><br/></br>
+      <a href="/room" class="btn btn-orange"><h3>Join Room</h3></a>
+    </div>
+    <footer>
+      <div class="container text-center">Karaoke web application built using Elixir</div>
+    </footer>
+  </body>
+</html>

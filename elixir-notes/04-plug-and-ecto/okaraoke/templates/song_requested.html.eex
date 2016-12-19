@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/9bad9a35d2.js"></script>
+    <style>
+      body {
+        background-color: #F4515A;
+      }
+      .room {
+        font-family: 'Montserrat', sans-serif;
+        color: #fff;
+      }
+      .song {
+        height: 500px;
+        width: 80%;
+        margin: auto;
+        background-color: #fff;
+        border-radius: 10px;
+      }
+      #player {
+        margin: 5% 50px;
+        width: 90%;
+      }
+      .next-song{
+        margin-top: 200px;
+      }
+      .btn-grey{
+        background-color: #494652;
+        color: #fff;
+      }
+      .btn-grey:hover{
+        color: #fff;
+      }
+    </style>
+
+    <title>Room</title>
+  </head>
+  <body>
+    <div class="room container">
+      <h1>Room <i class="fa fa-microphone" aria-hidden="true"></i></h1>
+
+      <br/><br/>
+      <div class="text-center song">
+        <a href="http://localhost:4001/room/<%= video %>" class="btn btn-grey next-song"><h1>Play Song</h1></a>
+      </div>
+    </div>
+  </body>
+</html>

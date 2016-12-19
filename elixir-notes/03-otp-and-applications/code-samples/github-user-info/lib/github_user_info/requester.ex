@@ -48,7 +48,7 @@ defmodule GithubUserInfo.Requester do
     {:reply, value, new_state}
   end
 
-  def handle_cast(:empty_cache, _state) do
+  def handle_cast(:empty_cache, state) do
     {:noreply, %{}}
   end
 

@@ -1,14 +1,16 @@
 defmodule LoopedMessage do
   def init do
-    spawn_link fn -> loop([]) end
+
+    __MODULE__
+    spawn_link fn -> foo([]) end
   end
 
-  def loop(state) do
+  def foo(state) do
     receive do
       msg ->
-        state = [msg | state]
-        IO.inspect state
-      loop(state)
+        new_state = [msg | state]
+        IO.inspect new_state
+        foo(new_state)
     end
   end
 end
