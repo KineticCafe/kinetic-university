@@ -9,6 +9,7 @@ Plug is a specification that enables different frameworks to talk to different w
 
 A plug . . .
   1. Receives a data structure that represents the HTTP request (usually referred to as a connection)
+  
       ```
       %Plug.Conn{host: "www.example.com",
            path_info: ["bar", "baz"],
