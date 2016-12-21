@@ -1,6 +1,6 @@
 ## Elixir Week 4: Elixir Libraries - Plug & Ecto
 
-### Plug
+## Plug
 
 #### What is it?
 Plug is a specification that enables different frameworks to talk to different web servers. Plug achieves similar objectives to Rack in Ruby.
@@ -9,7 +9,7 @@ Plug is a specification that enables different frameworks to talk to different w
 
 A plug . . .
   1. Receives a data structure that represents the HTTP request (usually referred to as a connection)
-  
+
       ```
       %Plug.Conn{host: "www.example.com",
            path_info: ["bar", "baz"],
@@ -127,8 +127,86 @@ defmodule MyPlugTest do
 end
 ```
 
-### Ecto
+## Ecto
+
+### Installation
+
+  1. Include ecto and a database adapter (in this tutorial we will be using PostgreSQL) as a dependency in `mix.exs`
+
+  ```
+  defp deps do
+    [{:ecto, "~> 1.0"},
+     {:postgrex, ">= 0.0.0"}]
+  end
+```
+
+  2. Add ecto and adapter to the application list in `mix.exs`
+
+  ```
+  def application do
+    [applications: [:ecto, :postgrex]]
+  end
+```
+
+  3. Run `mix ecto.gen.repo`
+
+  This command creates the project repository `lib\[project_name]\repo.ex`
+
+  ```
+  defmodule ExampleApp.Repo do
+    use Ecto.Repo,
+      otp_app: :example_app
+  end
+  ```
+
+  And adds repository, adapter, database and account information to `config/config.exs`
+
+  4. Add the created repo to the supervior tree in `lib/[project_name].ex`
+
+  ```
+  children = [
+      supervisor(ExampleApp.Repo, [])
+    ]
+  ```
+
+### Migrations
+
+ Similar in syntax to ActiveRecord
+
+
+ ```
+  mix ecto.create         # Create the storage for the repo
+  mix ecto.drop           # Drop the storage for the repo
+  mix ecto.gen.migration  # Generate a new migration for the repo
+  mix ecto.gen.repo       # Generate a new repository
+  mix ecto.migrate        # Run migrations up on a repo
+  mix ecto.rollback       # Rollback migrations from a repo
+ ```  
+
+Migrations are saved in `priv/repo/migrations/`
+
+To apply our new migration run `mix ecto.migrate`
+
+### Models
+
+Models define our schema, helper methods, and our changesets.
+
+#### Changesets
+
+Changesets are operations done on top of the schema. They provide both validations and constraints which are ultimately turned into errors in case something goes wrong.
+
+#### Virtual fields
+
+Virtual fields are not saved to the database but are useful for validations
+
+e.g. `field :password_confirmation, :string, virtual: true`
+
+### Challenge
+
+[2048 Game](http://elixirquiz.github.io/)
+
 
 ### Resources
 [Getting Started with Elixir Plug: Routes](https://jarredtrost.com/getting-started-with-elixir-plug-routes-3bbd1dba00e#.fx4ogdlzu)
 [Plug](https://github.com/elixir-lang/plug)
+[Ecto](https://elixirschool.com/lessons/specifics/ecto/)

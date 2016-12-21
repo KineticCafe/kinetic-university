@@ -14,7 +14,7 @@ defmodule Okaraoke.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :cowboy, :plug, :httpoison],
+    [applications: [:logger, :cowboy, :plug, :httpoison, :ecto, :postgrex],
      mod: {Okaraoke, []}]
   end
 
@@ -33,7 +33,9 @@ defmodule Okaraoke.Mixfile do
      {:plug, "~> 1.0"},
      {:httpoison, "~> 0.10"},
      {:poison, "~> 2.0"},
-     {:plug_redirect, "~> 0.0"}
+     {:plug_redirect, "~> 0.0"},
+     {:ecto, "~> 1.0"},
+     {:postgrex, ">= 0.0.0"}
     ]
   end
 end

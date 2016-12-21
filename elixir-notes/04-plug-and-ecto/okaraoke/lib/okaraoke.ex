@@ -8,7 +8,8 @@ defmodule Okaraoke do
 
     children = [
       Plug.Adapters.Cowboy.child_spec(:http, Okaraoke.Plug.Router, [], [port: 4001]),
-      worker(Room, [])
+      worker(Room, []),
+      supervisor(Okaraoke.Repo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
