@@ -3,7 +3,7 @@ defmodule Okaraoke.Repo.Migrations.Song do
 
   def change do
     create table(:songs) do
-      add :external_id, :integer, unique: true
+      add :external_id, :string, unique: true
       add :description, :string
 
       timestamps

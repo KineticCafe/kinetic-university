@@ -4,7 +4,7 @@ defmodule Okaraoke.Mixfile do
   def project do
     [app: :okaraoke,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -34,8 +34,8 @@ defmodule Okaraoke.Mixfile do
      {:httpoison, "~> 0.10"},
      {:poison, "~> 2.0"},
      {:plug_redirect, "~> 0.0"},
-     {:ecto, "~> 1.0"},
-     {:postgrex, ">= 0.0.0"}
+     {:ecto, "~> 2.0"},
+     {:postgrex, ">= 0.13.0"}
     ]
   end
 end

@@ -129,6 +129,12 @@ end
 
 ## Ecto
 
+There are 4 main components to Ecto:
+  1. Ecto.Repo - wrapper around data. Requires a data adapter and credentials
+  2. Ecto.Schema - maps data source into Elixir struct
+  3. Ecto.Changeset - a way to filter/cast external parameters and provide validation/constraints when manipulating data
+  4. Ecto.Query - used to retrieve/manipulate data from database
+
 ### Installation
 
   1. Include ecto and a database adapter (in this tutorial we will be using PostgreSQL) as a dependency in `mix.exs`
@@ -161,7 +167,7 @@ end
 
   And adds repository, adapter, database and account information to `config/config.exs`
 
-  4. Add the created repo to the supervior tree in `lib/[project_name].ex`
+  4. Add the created repo to the supervisor tree in `lib/[project_name].ex`
 
   ```
   children = [
@@ -172,7 +178,6 @@ end
 ### Migrations
 
  Similar in syntax to ActiveRecord
-
 
  ```
   mix ecto.create         # Create the storage for the repo
@@ -187,9 +192,22 @@ Migrations are saved in `priv/repo/migrations/`
 
 To apply our new migration run `mix ecto.migrate`
 
-### Models
+#### Schema
 
-Models define our schema, helper methods, and our changesets.
+Defines struct with fields as listed in schema
+
+`%My_App.User{username: "user_name", email: "user@name.com"}`
+
+```
+schema "users" do
+  field :username, :string
+  field :email, :string
+
+  timestamps
+end
+```
+
+Has similar macros to ActiveRecord e.g. `belongs_to`, `has_many`, `many_to_many`
 
 #### Changesets
 
@@ -200,6 +218,12 @@ Changesets are operations done on top of the schema. They provide both validatio
 Virtual fields are not saved to the database but are useful for validations
 
 e.g. `field :password_confirmation, :string, virtual: true`
+
+### Queries
+
+- Similar to ActiveRecord
+- Can insert SQL fragments
+- External values and Elixir expressions can be injected into a query expression with ^
 
 ### Challenge
 
